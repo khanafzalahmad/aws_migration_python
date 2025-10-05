@@ -1,0 +1,9 @@
+input_file: "sample_data.csv"
+output_file: "transformed_data.csv"
+
+transformations:
+  drop_columns:
+    - "unnecessary_column"
+  filter:
+    column: "status"
+    value: "active"

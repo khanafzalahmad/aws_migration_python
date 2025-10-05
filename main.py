@@ -1,20 +1,45 @@
+import logging
+import yaml
 from input_handler import read_csv_file
 from transformer import transform_data
 
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s"
+)
+
 def main():
+    #file_path = 'sample_data.csv'
+    #output_path = 'transformed_data.csv'
+    #load config
+    with open("config.yaml","r") as f:
+        config = yaml.safe_load(f)
+
+    input_file = config["input_file"]
+    output_file = config["output_file"]
+    transformations = config["transformations"]
+
+    logging.info("Starting data processing pipeline")
+
+
     # Step 1: Read data
-    df = read_csv_file('sample_data.csv')
+    df = read_csv_file(input_file)
     if df is None:
+        logging.error("Failed to read input file")
         return
     
-    print("Original Data:")
-    print(df)
+    logging.info("Original Data:")
+    logging.info(f"original data: {df}")
 
    # Step 2: Transform data
-    transformed_df = transform_data(df)
+    transformed_df = transform_data(df, transformations)
 
-    print("\nTransformed Data:")
-    print(transformed_df)
+    logging.info("Transformed Data:")
+    logging.info(f"transformed data: {transformed_df}")
+
+    # Step 3: Save transformed data
+    transformed_df.to_csv(output_file, index=False)
+    logging.info(f"Transformed data saved to {output_file}")
 
 if __name__ == "__main__":
     main()

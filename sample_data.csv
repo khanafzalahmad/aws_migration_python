@@ -1,6 +1,6 @@
-id,name,status,unnecessary_column
-1,Alice,active,foo
-2,Bob,inactive,bar
-3,Charlie,active,baz
-4,David,inactive,qux
-5,Eve,active,quux
+id,name,status,unnecessary_column,amount
+1,Alice,active,foo,100
+2,Bob,inactive,bar,200
+3,Charlie,active,baz,150
+4,David,inactive,qux,300
+5,Eve,active,quux,250

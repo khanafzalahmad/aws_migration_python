@@ -17,9 +17,8 @@ def transform_data(df, config):
     
     if col and val:
         df = df[df[col] == val]
+    
+    if "amount" in df.columns:
+        df["amount_normalized"] = (df["amount"] - np.mean(df["amount"])) / np.std(df["amount"])
 
-    if 'unnecessary_column' in df.columns:
-        df = df.drop(columns=['unnecessary_column'])
-
-    df = df[df['status'] == 'active']
     return df
